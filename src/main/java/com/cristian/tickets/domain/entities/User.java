@@ -1,4 +1,4 @@
-package com.cristian.tickets.domain;
+package com.cristian.tickets.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,7 +30,7 @@ public class User {
     private String email;
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
-    private List<Event> organizedEvents = new ArrayList<>();
+    private List<com.cristian.tickets.domain.Event> organizedEvents = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -38,7 +38,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private List<Event> attendingEvents = new ArrayList<>();
+    private List<com.cristian.tickets.domain.Event> attendingEvents = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

@@ -1,6 +1,6 @@
 package com.cristian.tickets.filters;
 
-import com.cristian.tickets.domain.User;
+import com.cristian.tickets.domain.entities.User;
 import com.cristian.tickets.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.cristian.tickets.domain;
+package com.cristian.tickets.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
