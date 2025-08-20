@@ -2,6 +2,7 @@ package com.cristian.tickets.services.impl;
 
 
 import com.cristian.tickets.domain.CreateEventRequest;
+import com.cristian.tickets.domain.UpdateEventRequest;
 import com.cristian.tickets.domain.entities.Event;
 import com.cristian.tickets.domain.entities.Ticket;
 import com.cristian.tickets.domain.entities.TicketType;
@@ -67,5 +68,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public Optional<Event> getEventForOrganizer(UUID organizerId, UUID id) {
         return eventRepository.findByIdAndOrganizerId(id, organizerId);
+    }
+
+    @Override
+    public Event updateEventForOrganizer(UUID organizerId, UUID id, UpdateEventRequest event) {
+
     }
 }
