@@ -23,4 +23,5 @@ public interface EventMapper {
     UpdateEventRequest fromDto(UpdateEventRequestDto dto);
     UpdateTicketTypeResponseDto toUpdateTicketTypeResponseDto(TicketType ticketType);
     UpdateEventResponseDto toUpdateEventResponseDto(Event event);
+    ListPublishedEventsResponseDto toListPublishedEventsResponseDto(Event event);
 }
