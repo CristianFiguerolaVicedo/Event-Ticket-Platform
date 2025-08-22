@@ -4,10 +4,7 @@ package com.cristian.tickets.services.impl;
 import com.cristian.tickets.domain.CreateEventRequest;
 import com.cristian.tickets.domain.UpdateEventRequest;
 import com.cristian.tickets.domain.UpdateTicketTypeRequest;
-import com.cristian.tickets.domain.entities.Event;
-import com.cristian.tickets.domain.entities.Ticket;
-import com.cristian.tickets.domain.entities.TicketType;
-import com.cristian.tickets.domain.entities.User;
+import com.cristian.tickets.domain.entities.*;
 import com.cristian.tickets.exceptions.EventNotFoundException;
 import com.cristian.tickets.exceptions.EventUpdateException;
 import com.cristian.tickets.exceptions.TicketTypeNotFoundException;
@@ -143,5 +140,10 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void deleteEventForOrganizer(UUID organizerId, UUID id) {
         getEventForOrganizer(organizerId, id).ifPresent(eventRepository::delete);
+    }
+
+    @Override
+    public Page<Event> listPublishedEvents(Pageable pageable) {
+        return eventRepository.findByStatus(EventStatusEnum.PUBLISHED, pageable);
     }
 }
