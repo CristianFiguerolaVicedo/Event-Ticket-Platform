@@ -1,10 +1,8 @@
 package com.cristian.tickets.controllers;
 
 import com.cristian.tickets.domain.CreateEventRequest;
-import com.cristian.tickets.domain.dtos.CreateEventRequestDto;
-import com.cristian.tickets.domain.dtos.CreateEventResponseDto;
-import com.cristian.tickets.domain.dtos.GetEventDetailsResponseDto;
-import com.cristian.tickets.domain.dtos.ListEventResponseDto;
+import com.cristian.tickets.domain.UpdateEventRequest;
+import com.cristian.tickets.domain.dtos.*;
 import com.cristian.tickets.domain.entities.Event;
 import com.cristian.tickets.mappers.EventMapper;
 import com.cristian.tickets.services.EventService;
@@ -61,6 +59,20 @@ public class EventController {
                 .map(eventMapper::toGetEventDetailsResponseDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping(path = "/{eventId}")
+    public ResponseEntity<UpdateEventResponseDto> updateEvent(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable UUID eventId,
+            @Valid @RequestBody UpdateEventRequestDto updateEventRequestDto
+    ) {
+        UpdateEventRequest updateEventRequest = eventMapper.fromDto(updateEventRequestDto);
+        UUID userId = parseUserId(jwt);
+
+        Event updatedEvent = eventService.updateEventForOrganizer(userId, eventId, updateEventRequest);
+        UpdateEventResponseDto updateEventResponseDto = eventMapper.toUpdateEventResponseDto(updatedEvent);
+        return ResponseEntity.ok(updateEventResponseDto);
     }
 
     private UUID parseUserId(Jwt jwt) {
