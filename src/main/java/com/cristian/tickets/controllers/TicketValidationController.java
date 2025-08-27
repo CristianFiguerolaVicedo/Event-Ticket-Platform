@@ -27,7 +27,7 @@ public class TicketValidationController {
     ) {
         TicketValidationMethod method = ticketValidationRequestDto.getMethod();
 
-        TicketValidation ticketValidation
+        TicketValidation ticketValidation;
         if (TicketValidationMethod.MANUAL.equals(method)) {
             ticketValidation = ticketValidationService.validateTicketManually(
                     ticketValidationRequestDto.getId());
